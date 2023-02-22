@@ -1,4 +1,4 @@
-# Botlan
+# NarrativeAI
 
 ## Description 
 
@@ -17,7 +17,8 @@ The virtualenv package is required to create virtual environments. You can insta
 
 1. Clone the repo
 ```sh
-    git clone https://github.com/Scylidose/Botlan.git
+    git clone https://github.com/Scylidose/NarrativeAI.git
+    cd NarrativeAI/
 ```
 
 2. Create virtual environment

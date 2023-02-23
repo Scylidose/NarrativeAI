@@ -8,8 +8,8 @@ models/
 # Ignore data files that are too large or contain sensitive information
 data/person_of_interest/*.zip
 data/person_of_interest/*.rar
-data/person_of_interest/private/
-data/person_of_interest/processed/
+data/person_of_interest/raw/
+data/person_of_interest/cleaned/
 
 # Ignore all text files in season folders
 data/person_of_interest/*/[^/]*.txt
@@ -22,3 +22,6 @@ data/person_of_interest/*/[^/]*.txt
 # Ignore system files and directories
 .DS_Store
 Thumbs.db
+
+# Ignore virtual environment
+venv/

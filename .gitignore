@@ -6,8 +6,8 @@ __pycache__/
 models/
 
 # Ignore data files that are too large or contain sensitive information
-data/person_of_interest/*.zip
-data/person_of_interest/*.rar
+*.zip
+*.rar
 data/person_of_interest/raw/
 data/person_of_interest/cleaned/
 

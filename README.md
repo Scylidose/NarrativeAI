@@ -154,7 +154,14 @@ The following is the recommended folder structure for this project:
 └── README.md
 ```
 
-The `data` directory should contain the transcripts for the TV series, organized by season and episode. The `models` directory should contain the trained language models, organized by model name. The `results` directory should contain the generated text, outputed by the trained and saved model. The `preprocess_text.py` is used to preprocess the text applying diverse operations. The `train_model.py` and `generate_script.py` scripts are used for training and generating text, respectively. The `.gitignore` file specifies files and directories that should be ignored by Git. The `requirements.txt` file list all the necessary packages to run the project. The `README.md` file is the documentation for the project.
+The `data` directory should contain the transcripts for the TV series, organized by season and episode.  
+The `models` directory should contain the trained language models, organized by model name.  
+The `results` directory should contain the generated text, outputed by the trained and saved model.  
+The `preprocess_text.py` is used to preprocess the text applying diverse operations  
+The `train_model.py` and `generate_script.py` scripts are used for training and generating text, respectively.  
+The `.gitignore` file specifies files and directories that should be ignored by Git.  
+The `requirements.txt` file list all the necessary packages to run the project.  
+The `README.md` file is the documentation for the project.
 
 ## Contributing
 

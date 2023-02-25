@@ -77,7 +77,7 @@ def set_seed(seed):
     torch.cuda.manual_seed_all(seed)
 
 
-def train_gpt_neo(data_dir: str, output_dir: str,
+def train_gpt_neo(train_data_dir: str, eval_data_dir: str, model_dir: str,
                   model_name: str = "EleutherAI/gpt-neo-1.3B",
                   batch_size: int = 4, epochs: int = 1,
                   learning_rate: float = 2e-5,
@@ -86,9 +86,10 @@ def train_gpt_neo(data_dir: str, output_dir: str,
     Trains a GPT-Neo language model on the provided dataset.
 
     Args:
-        data_dir (str): The directory containing the cleaned input data.
-        output_dir (str): The directory to save the trained model and training
-                          logs.
+        train_data_dir (str): The directory containing the cleaned input training data.
+        eval_data_dir (str): The directory containing the cleaned input eval data.
+        model_dir (str): The directory to save the trained model and training
+                         logs.
         model_name (str, optional): The name of the pretrained GPT-Neo
                                     model to use.
         batch_size (int, optional): The number of training samples per batch.
@@ -105,7 +106,8 @@ def train_gpt_neo(data_dir: str, output_dir: str,
     set_seed(42)
 
     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-    tokenized_dataset = load_datasets(data_dir, tokenizer)
+    train_tokenized_dataset = load_datasets(train_data_dir, tokenizer)
+    eval_tokenized_dataset = load_datasets(eval_data_dir, tokenizer)
 
     data_collator = DataCollatorForLanguageModeling(
                         tokenizer=tokenizer,
@@ -115,7 +117,7 @@ def train_gpt_neo(data_dir: str, output_dir: str,
     model = GPTNeoForCausalLM.from_pretrained(model_name)
 
     training_args = TrainingArguments(
-        output_dir=output_dir,
+        output_dir=model_dir,
         evaluation_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
@@ -127,7 +129,8 @@ def train_gpt_neo(data_dir: str, output_dir: str,
         model=model,
         args=training_args,
         data_collator=data_collator,
-        train_dataset=tokenized_dataset,
+        train_dataset=train_tokenized_dataset, 
+        eval_dataset=eval_tokenized_dataset
     )
 
     trainer.train()
@@ -136,4 +139,4 @@ def train_gpt_neo(data_dir: str, output_dir: str,
     trainer.evaluate()
 
     # Save the model
-    trainer.save_model(output_dir)
+    trainer.save_model(model_dir)

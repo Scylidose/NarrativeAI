@@ -2,8 +2,8 @@ from transformers import GPTNeoForCausalLM, GPT2Tokenizer
 import torch
 
 
-def generate_text(model_path: str, prompt: list,
-                  max_length: int = 10000,
+def generate_text(model_dir: str, results_dir: str,
+                  prompt: list, max_length: int = 10000,
                   num_sequences: int = 1,
                   do_sample: bool = True):
     """
@@ -11,8 +11,10 @@ def generate_text(model_path: str, prompt: list,
     transformer model.
 
     Args:
-        model_path (str): The path to the directory where the pre-trained
-                          model is stored.
+        model_dir (str): The path to the directory where the pre-trained
+                         model is stored.
+        results_dir (str): The path to the directory where the generated
+                           text should be stored.
         prompt (str): The prompt to generate new text from.
         max_length (int, optional): The maximum number of tokens to generate.
                                     Defaults to 10000.
@@ -27,8 +29,8 @@ def generate_text(model_path: str, prompt: list,
         str: The generated text.
     """
     # Load the saved model and tokenizer
-    model = GPTNeoForCausalLM.from_pretrained(model_path)
-    tokenizer = GPT2Tokenizer.from_pretrained(model_path)
+    model = GPTNeoForCausalLM.from_pretrained(model_dir)
+    tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
 
     # Encode the prompt with the tokenizer
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
@@ -46,5 +48,5 @@ def generate_text(model_path: str, prompt: list,
     generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
 
     # Export generated text to a file
-    with open("results/generated_text.txt", "w", encoding='utf-8') as f:
+    with open(results_dir + "generated_text.txt", "w", encoding='utf-8') as f:
         f.write(generated_text)

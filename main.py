@@ -17,22 +17,27 @@ def main():
         None
     """
     # Set up file paths
-    data_dir = "data/person_of_interest/"
+    train_data_dir = "data/person_of_interest/train"
+    train_raw_path = os.path.join(train_data_dir, "raw")
+    train_clean_path = os.path.join(train_data_dir, "cleaned")
 
-    raw_path = os.path.join(data_dir, "raw")
-    clean_path = os.path.join(data_dir, "cleaned")
-    model_path = "models/"
-    output_dir = "results/"
+    eval_data_dir = "data/person_of_interest/eval"
+    eval_raw_path = os.path.join(eval_data_dir, "raw")
+    eval_clean_path = os.path.join(eval_data_dir, "cleaned")
+
+    model_dir = "models/"
+    results_dir = "results/"
     prompt = "You are being watched. The government has a secret system:"
 
     # Preprocess data
-    preprocess_dataset(raw_path)
+    preprocess_dataset(train_raw_path)
+    preprocess_dataset(eval_raw_path)
 
     # Train GPT-Neo
-    train_gpt_neo(clean_path, output_dir)
+    train_gpt_neo(train_clean_path, eval_clean_path, model_dir)
 
     # Generate new transcript
-    generate_text(model_path, prompt)
+    generate_text(model_dir, results_dir, prompt)
 
 
 if __name__ == "__main__":

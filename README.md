@@ -2,6 +2,8 @@
 
 NarrativeAI is a project that uses machine learning to generate new transcripts for the Person of Interest TV series. The project is based on the idea of training a language model on the existing transcripts of the show and using it to generate new ones.
 
+<img width="470" alt="Capture d’écran 2023-02-26 à 20 03 09" src="https://user-images.githubusercontent.com/28122432/221449543-74b5933b-3b1b-4a61-b42f-a8c23c463916.png">
+
 ## Getting Started
 
 ### Prerequisites
